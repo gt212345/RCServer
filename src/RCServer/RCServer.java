@@ -5,8 +5,6 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -15,10 +13,6 @@ public class RCServer {
 	static ServerSocket serverSocket;
 	static InputStream in;
 	static Socket client;
-	private static int key;
-
-	// private static ObjectInputStream fromClient;
-	// private static ObjectOutputStream fromServer;
 
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, AWTException {
@@ -35,10 +29,6 @@ public class RCServer {
 						Robot robot = new Robot();
 						while (true) {
 							client = serverSocket.accept();
-							// fromClient = new
-							// ObjectInputStream(client.getInputStream());
-							// fromServer = new
-							// ObjectOutputStream(client.getOutputStream());
 							in = client.getInputStream();
 							do {
 								i = in.read();
@@ -49,11 +39,6 @@ public class RCServer {
 											.println("Server: Client connected");
 									break;
 								}
-								// ChoicesServer choice =
-								// (ChoicesServer)fromClient.readObject();
-								// System.out.println("the flag is " +
-								// choice.getKey());
-								// key = choice.getKey();
 								switch (i) {
 								case 0:
 									robot.keyPress(KeyEvent.VK_SHIFT);
