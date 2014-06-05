@@ -1,19 +1,13 @@
 package RCServer;
 
 import java.awt.AWTException;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.server.SocketSecurityException;
 
 public class RCServer {
 	static int i, j;
@@ -22,7 +16,8 @@ public class RCServer {
 	static ObjectInputStream ois;
 	static Socket client;
 	static int[] coordinate;
-//	static Point mouse;
+
+	// static Point mouse;
 
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, AWTException {
@@ -43,7 +38,7 @@ public class RCServer {
 						Thread.sleep(500);
 						if (j == 6) {
 							System.out
-									.println("Server: PowerPointControl Mode");
+									.println("Server: PowerPoint Control Mode");
 							do {
 								i = in.read();
 								if (i == 5) {
@@ -86,10 +81,7 @@ public class RCServer {
 									break;
 								case 4:
 									System.out
-											.println("Server: Client disconnected, waiting for another......");
-									in.close();
-									client.close();
-									serverSocket.close();
+											.println("Server: PowerPoint Control Mode Cancelled");
 									break;
 								default:
 									break;
@@ -99,13 +91,20 @@ public class RCServer {
 						if (j == 7) {
 							System.out.println("Server: MouseControl Mode");
 							ois = new ObjectInputStream(client.getInputStream());
-							do {
-//								mouse = MouseInfo.getPointerInfo()
-//										.getLocation();
+							while (true) {
+								// mouse = MouseInfo.getPointerInfo()
+								// .getLocation();
 								coordinate = (int[]) ois.readObject();
-								robot.mouseMove(4*coordinate[0],
-										(int) (1.35* coordinate[1]));
-							} while (j != 4);
+								if (coordinate[0] != 4) {
+									robot.mouseMove(4 * coordinate[0],
+											(int) (1.35 * coordinate[1]));
+								} else {
+									System.out
+											.println("Server: MouseControl Mode Cancelled");
+									break;
+								}
+							}
+							;
 						}
 					}
 				} catch (Exception e) {
