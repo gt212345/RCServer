@@ -1,7 +1,9 @@
 package RCServer;
 
 import java.awt.AWTException;
+import java.awt.MouseInfo;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
@@ -98,6 +100,10 @@ public class RCServer {
 								if (coordinate[0] != 4) {
 									robot.mouseMove(4 * coordinate[0],
 											(int) (1.35 * coordinate[1]));
+									if(coordinate[0] == 1){
+										robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+										robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+									}
 								} else {
 									System.out
 											.println("Server: MouseControl Mode Cancelled");
