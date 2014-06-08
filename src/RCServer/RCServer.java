@@ -45,13 +45,6 @@ public class RCServer {
 									.println("Server: PowerPoint Control Mode");
 							do {
 								i = in.read();
-								if (i == 5) {
-									client.close();
-									serverSocket.close();
-									System.out
-											.println("Server: Client connected");
-									break;
-								}
 								switch (i) {
 								case 0:
 									robot.keyPress(KeyEvent.VK_SHIFT);
@@ -80,17 +73,37 @@ public class RCServer {
 								case 3:
 									robot.keyPress(KeyEvent.VK_ESCAPE);
 									Thread.sleep(10);
-									robot.keyPress(KeyEvent.VK_ESCAPE);
+									robot.keyRelease(KeyEvent.VK_ESCAPE);
 									Thread.sleep(10);
 									break;
+
 								case 4:
+									robot.keyPress(KeyEvent.VK_W);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_W);
+									Thread.sleep(10);
+									break;
+
+								case 5:
+									robot.keyPress(KeyEvent.VK_CONTROL);
+									Thread.sleep(20);
+									robot.keyPress(KeyEvent.VK_P);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_CONTROL);
+									robot.keyRelease(KeyEvent.VK_P);
+									Thread.sleep(10);
+									break;
+
+								case 7:
 									System.out
 											.println("Server: PowerPoint Control Mode Cancelled");
 									break;
+
 								default:
 									break;
+
 								}
-							} while (i != 4);
+							} while (i != 7);
 						}
 						if (j == 7) {
 							System.out.println("Server: MouseControl Mode");
@@ -101,8 +114,6 @@ public class RCServer {
 										&& coordinate[0] != 2001) {
 									mouse = MouseInfo.getPointerInfo()
 											.getLocation();
-									// robot.mouseMove(4 * coordinate[0],
-									// (int) (1.35 * coordinate[1]));
 									robot.mouseMove(mouse.x - coordinate[0],
 											mouse.y - coordinate[1]);
 								} else {
