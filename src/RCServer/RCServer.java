@@ -28,7 +28,7 @@ public class RCServer {
 
 			@Override
 			public void run() {
-				int[] coordinate = new int[]{};
+				int[] coordinate = new int[] {};
 				// TODO Auto-generated method stub
 				int ServerPort = 1025;
 				System.out.println("Server: Waiting for connection......");
@@ -97,24 +97,30 @@ public class RCServer {
 							ois = new ObjectInputStream(client.getInputStream());
 							while (true) {
 								coordinate = (int[]) ois.readObject();
-								if (coordinate[0] != 2000) {
-									 mouse = MouseInfo.getPointerInfo()
-											 .getLocation();
-//									robot.mouseMove(4 * coordinate[0],
-//											(int) (1.35 * coordinate[1]));
-									robot.mouseMove(mouse.x-coordinate[0], mouse.y-coordinate[1]);
-									if(coordinate[0] == 1){
-//										robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-//										robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-									}
+								if (coordinate[0] != 2000
+										&& coordinate[0] != 2001) {
+									mouse = MouseInfo.getPointerInfo()
+											.getLocation();
+									// robot.mouseMove(4 * coordinate[0],
+									// (int) (1.35 * coordinate[1]));
+									robot.mouseMove(mouse.x - coordinate[0],
+											mouse.y - coordinate[1]);
 								} else {
-									System.out
-											.println("Server: MouseControl Mode Cancelled");
-									break;
+									if (coordinate[0] == 2001) {
+										robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+										Thread.sleep(20);
+										robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+										Thread.sleep(300);
+									} else {
+										System.out
+												.println("Server: MouseControl Mode Cancelled");
+										break;
+									}
 								}
 								coordinate[0] = 0;
 								coordinate[1] = 0;
-							};
+							}
+							;
 						}
 					}
 				} catch (Exception e) {
