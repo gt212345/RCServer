@@ -9,11 +9,12 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.lang.reflect.Field;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class RCServer {
-	static int i, j;
+	static int i, j, k;
 	static ServerSocket serverSocket;
 	static InputStream in;
 	static ObjectInputStream ois;
@@ -40,13 +41,74 @@ public class RCServer {
 						in = client.getInputStream();
 						j = in.read();
 						Thread.sleep(500);
-						if (j == 6) {
+						if (j == 106) {
 							System.out
 									.println("Server: PowerPoint Control Mode");
 							do {
 								i = in.read();
+								if (i < 10) {
+									robot.keyPress(0x30 + i);
+									Thread.sleep(20);
+									robot.keyRelease(0x30 + i);
+									Thread.sleep(20);
+									robot.keyPress(KeyEvent.VK_ENTER);
+									Thread.sleep(20);
+									robot.keyRelease(KeyEvent.VK_ENTER);
+								}
+								if (i >= 10 && i < 20) {
+									robot.keyPress(0x31);
+									Thread.sleep(20);
+									robot.keyRelease(0x31);
+									Thread.sleep(20);
+									robot.keyPress(0x30 + (i-10));
+									Thread.sleep(20);
+									robot.keyRelease(0x30 + (i-10));
+									Thread.sleep(20);
+									robot.keyPress(KeyEvent.VK_ENTER);
+									Thread.sleep(20);
+									robot.keyRelease(KeyEvent.VK_ENTER);
+								}
+								if (i >= 20 && i < 30) {
+									robot.keyPress(0x32);
+									Thread.sleep(20);
+									robot.keyRelease(0x32);
+									Thread.sleep(20);
+									robot.keyPress(0x30 + (i-20));
+									Thread.sleep(20);
+									robot.keyRelease(0x30 + (i-20));
+									Thread.sleep(20);
+									robot.keyPress(KeyEvent.VK_ENTER);
+									Thread.sleep(20);
+									robot.keyRelease(KeyEvent.VK_ENTER);
+								}
+								if (i >= 30 && i < 40) {
+									robot.keyPress(0x33);
+									Thread.sleep(20);
+									robot.keyRelease(0x33);
+									Thread.sleep(20);
+									robot.keyPress(0x30 + (i-30));
+									Thread.sleep(20);
+									robot.keyRelease(0x30 + (i-30));
+									Thread.sleep(20);
+									robot.keyPress(KeyEvent.VK_ENTER);
+									Thread.sleep(20);
+									robot.keyRelease(KeyEvent.VK_ENTER);
+								}
+								if (i >= 40 && i < 50) {
+									robot.keyPress(0x34);
+									Thread.sleep(20);
+									robot.keyRelease(0x34);
+									Thread.sleep(20);
+									robot.keyPress(0x30 + (i-40));
+									Thread.sleep(20);
+									robot.keyRelease(0x30 + (i-40));
+									Thread.sleep(20);
+									robot.keyPress(KeyEvent.VK_ENTER);
+									Thread.sleep(20);
+									robot.keyRelease(KeyEvent.VK_ENTER);
+								}
 								switch (i) {
-								case 0:
+								case 100:
 									robot.keyPress(KeyEvent.VK_SHIFT);
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_F5);
@@ -56,35 +118,35 @@ public class RCServer {
 									Thread.sleep(10);
 									break;
 
-								case 1:
+								case 101:
 									robot.keyPress(KeyEvent.VK_LEFT);
 									Thread.sleep(10);
 									robot.keyRelease(KeyEvent.VK_LEFT);
 									Thread.sleep(10);
 									break;
 
-								case 2:
+								case 102:
 									robot.keyPress(KeyEvent.VK_RIGHT);
 									Thread.sleep(10);
 									robot.keyRelease(KeyEvent.VK_RIGHT);
 									Thread.sleep(10);
 									break;
 
-								case 3:
+								case 103:
 									robot.keyPress(KeyEvent.VK_ESCAPE);
 									Thread.sleep(10);
 									robot.keyRelease(KeyEvent.VK_ESCAPE);
 									Thread.sleep(10);
 									break;
 
-								case 4:
+								case 104:
 									robot.keyPress(KeyEvent.VK_W);
 									Thread.sleep(10);
 									robot.keyRelease(KeyEvent.VK_W);
 									Thread.sleep(10);
 									break;
 
-								case 5:
+								case 105:
 									robot.keyPress(KeyEvent.VK_CONTROL);
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_P);
@@ -94,7 +156,7 @@ public class RCServer {
 									Thread.sleep(10);
 									break;
 
-								case 7:
+								case 107:
 									System.out
 											.println("Server: PowerPoint Control Mode Cancelled");
 									break;
@@ -103,7 +165,7 @@ public class RCServer {
 									break;
 
 								}
-							} while (i != 7);
+							} while (i != 107);
 						}
 						if (j == 7) {
 							System.out.println("Server: MouseControl Mode");
@@ -133,6 +195,110 @@ public class RCServer {
 							}
 							;
 						}
+						if (j == 9) {
+							System.out.println("Server: YoutubeControl Mode");
+							do {
+								k = in.read();
+								switch (k) {
+								case 0:
+									robot.keyPress(KeyEvent.VK_0);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_0);
+									Thread.sleep(10);
+									break;
+								case 1:
+									robot.keyPress(KeyEvent.VK_1);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_1);
+									Thread.sleep(10);
+									break;
+								case 2:
+									robot.keyPress(KeyEvent.VK_2);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_2);
+									Thread.sleep(10);
+									break;
+								case 3:
+									robot.keyPress(KeyEvent.VK_3);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_3);
+									Thread.sleep(10);
+									break;
+								case 4:
+									robot.keyPress(KeyEvent.VK_4);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_4);
+									Thread.sleep(10);
+									break;
+								case 5:
+									robot.keyPress(KeyEvent.VK_5);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_5);
+									Thread.sleep(10);
+									break;
+								case 6:
+									robot.keyPress(KeyEvent.VK_6);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_6);
+									Thread.sleep(10);
+									break;
+								case 7:
+									robot.keyPress(KeyEvent.VK_7);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_7);
+									Thread.sleep(10);
+									break;
+								case 8:
+									robot.keyPress(KeyEvent.VK_8);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_8);
+									Thread.sleep(10);
+									break;
+								case 9:
+									robot.keyPress(KeyEvent.VK_9);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_9);
+									Thread.sleep(10);
+									break;
+								case 10:
+									robot.keyPress(KeyEvent.VK_SPACE);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_SPACE);
+									Thread.sleep(10);
+									break;
+								case 11:
+									robot.keyPress(KeyEvent.VK_LEFT);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_LEFT);
+									Thread.sleep(10);
+									break;
+								case 12:
+									robot.keyPress(KeyEvent.VK_RIGHT);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_RIGHT);
+									Thread.sleep(10);
+									break;
+								case 13:
+									robot.keyPress(KeyEvent.VK_UP);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_UP);
+									Thread.sleep(10);
+									break;
+								case 14:
+									robot.keyPress(KeyEvent.VK_DOWN);
+									Thread.sleep(10);
+									robot.keyRelease(KeyEvent.VK_DOWN);
+									Thread.sleep(10);
+									break;
+								case 15:
+									System.out
+											.println("Server: YoutubControl Mode Cancelled");
+									break;
+								default:
+									break;
+								}
+							} while (k != 15);
+						}
 					}
 				} catch (Exception e) {
 					System.out.println("Server: Error");
@@ -142,5 +308,4 @@ public class RCServer {
 		});
 		Server.start();
 	}
-
 }
