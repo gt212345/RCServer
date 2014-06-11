@@ -30,7 +30,7 @@ public class RCServer {
 			public void run() {
 				int[] coordinate = new int[] {};
 				// TODO Auto-generated method stub
-				int ServerPort = 1025;
+				int ServerPort = 2025;
 				System.out.println("Server: Waiting for connection......");
 				try {
 					serverSocket = new ServerSocket(ServerPort);
@@ -59,9 +59,9 @@ public class RCServer {
 									Thread.sleep(20);
 									robot.keyRelease(0x31);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i-10));
+									robot.keyPress(0x30 + (i - 10));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i-10));
+									robot.keyRelease(0x30 + (i - 10));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
@@ -72,9 +72,9 @@ public class RCServer {
 									Thread.sleep(20);
 									robot.keyRelease(0x32);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i-20));
+									robot.keyPress(0x30 + (i - 20));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i-20));
+									robot.keyRelease(0x30 + (i - 20));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
@@ -85,9 +85,9 @@ public class RCServer {
 									Thread.sleep(20);
 									robot.keyRelease(0x33);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i-30));
+									robot.keyPress(0x30 + (i - 30));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i-30));
+									robot.keyRelease(0x30 + (i - 30));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
@@ -98,9 +98,9 @@ public class RCServer {
 									Thread.sleep(20);
 									robot.keyRelease(0x34);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i-40));
+									robot.keyPress(0x30 + (i - 40));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i-40));
+									robot.keyRelease(0x30 + (i - 40));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
@@ -172,7 +172,7 @@ public class RCServer {
 							while (true) {
 								coordinate = (int[]) ois.readObject();
 								if (coordinate[0] != 2000
-										&& coordinate[0] != 2001) {
+										&& coordinate[0] != 2001 && coordinate[0] != 2002) {
 									mouse = MouseInfo.getPointerInfo()
 											.getLocation();
 									robot.mouseMove(mouse.x - coordinate[0],
@@ -182,6 +182,11 @@ public class RCServer {
 										robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 										Thread.sleep(20);
 										robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+										Thread.sleep(300);
+									} else if (coordinate[0] == 2002) {
+										robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+										Thread.sleep(20);
+										robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
 										Thread.sleep(300);
 									} else {
 										System.out
