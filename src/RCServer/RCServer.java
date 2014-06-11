@@ -13,7 +13,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class RCServer {
-	static int i, j, k;
+	static int pptmode, modeDetect,youtubemode;
 	static ServerSocket serverSocket;
 	static InputStream in;
 	static ObjectInputStream ois;
@@ -38,75 +38,75 @@ public class RCServer {
 					while (true) {
 						client = serverSocket.accept();
 						in = client.getInputStream();
-						j = in.read();
+						modeDetect = in.read();
 						Thread.sleep(500);
-						if (j == 106) {
+						if (modeDetect == 106) {
 							System.out
 									.println("Server: PowerPoint Control Mode");
 							do {
-								i = in.read();
-								if (i < 10) {
-									robot.keyPress(0x30 + i);
+								pptmode = in.read();
+								if (pptmode < 10) {
+									robot.keyPress(0x30 + pptmode);
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + i);
+									robot.keyRelease(0x30 + pptmode);
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
 									robot.keyRelease(KeyEvent.VK_ENTER);
 								}
-								if (i >= 10 && i < 20) {
+								if (pptmode >= 10 && pptmode < 20) {
 									robot.keyPress(0x31);
 									Thread.sleep(20);
 									robot.keyRelease(0x31);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i - 10));
+									robot.keyPress(0x30 + (pptmode - 10));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i - 10));
+									robot.keyRelease(0x30 + (pptmode - 10));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
 									robot.keyRelease(KeyEvent.VK_ENTER);
 								}
-								if (i >= 20 && i < 30) {
+								if (pptmode >= 20 && pptmode < 30) {
 									robot.keyPress(0x32);
 									Thread.sleep(20);
 									robot.keyRelease(0x32);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i - 20));
+									robot.keyPress(0x30 + (pptmode - 20));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i - 20));
+									robot.keyRelease(0x30 + (pptmode - 20));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
 									robot.keyRelease(KeyEvent.VK_ENTER);
 								}
-								if (i >= 30 && i < 40) {
+								if (pptmode >= 30 && pptmode < 40) {
 									robot.keyPress(0x33);
 									Thread.sleep(20);
 									robot.keyRelease(0x33);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i - 30));
+									robot.keyPress(0x30 + (pptmode - 30));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i - 30));
+									robot.keyRelease(0x30 + (pptmode - 30));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
 									robot.keyRelease(KeyEvent.VK_ENTER);
 								}
-								if (i >= 40 && i < 50) {
+								if (pptmode >= 40 && pptmode < 50) {
 									robot.keyPress(0x34);
 									Thread.sleep(20);
 									robot.keyRelease(0x34);
 									Thread.sleep(20);
-									robot.keyPress(0x30 + (i - 40));
+									robot.keyPress(0x30 + (pptmode - 40));
 									Thread.sleep(20);
-									robot.keyRelease(0x30 + (i - 40));
+									robot.keyRelease(0x30 + (pptmode - 40));
 									Thread.sleep(20);
 									robot.keyPress(KeyEvent.VK_ENTER);
 									Thread.sleep(20);
 									robot.keyRelease(KeyEvent.VK_ENTER);
 								}
-								switch (i) {
+								switch (pptmode) {
 								case 100:
 									robot.keyPress(KeyEvent.VK_SHIFT);
 									Thread.sleep(20);
@@ -164,9 +164,9 @@ public class RCServer {
 									break;
 
 								}
-							} while (i != 107);
+							} while (pptmode != 107);
 						}
-						if (j == 7) {
+						if (modeDetect == 7) {
 							System.out.println("Server: MouseControl Mode");
 							ois = new ObjectInputStream(client.getInputStream());
 							while (true) {
@@ -199,11 +199,11 @@ public class RCServer {
 							}
 							;
 						}
-						if (j == 9) {
+						if (modeDetect == 9) {
 							System.out.println("Server: YoutubeControl Mode");
 							do {
-								k = in.read();
-								switch (k) {
+								youtubemode = in.read();
+								switch (youtubemode) {
 								case 0:
 									robot.keyPress(KeyEvent.VK_0);
 									Thread.sleep(10);
@@ -301,7 +301,7 @@ public class RCServer {
 								default:
 									break;
 								}
-							} while (k != 15);
+							} while (youtubemode != 15);
 						}
 					}
 				} catch (Exception e) {
