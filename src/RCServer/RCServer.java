@@ -172,7 +172,7 @@ public class RCServer {
 							while (true) {
 								coordinate = (int[]) ois.readObject();
 								if (coordinate[0] != 2000
-										&& coordinate[0] != 2001 && coordinate[0] != 2002) {
+										&& coordinate[0] != 2001 && coordinate[0] != 2002 && coordinate[0] != 2003) {
 									mouse = MouseInfo.getPointerInfo()
 											.getLocation();
 									robot.mouseMove(mouse.x - coordinate[0],
@@ -184,6 +184,15 @@ public class RCServer {
 										robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 										Thread.sleep(300);
 									} else if (coordinate[0] == 2002) {
+										robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+										Thread.sleep(20);
+										robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+										Thread.sleep(300);
+									}else if(coordinate[0] == 2003){
+										robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+										Thread.sleep(20);
+										robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+										Thread.sleep(20);
 										robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
 										Thread.sleep(20);
 										robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
