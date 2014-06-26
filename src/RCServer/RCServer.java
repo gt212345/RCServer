@@ -19,8 +19,7 @@ public class RCServer {
 	static ObjectInputStream ois;
 	static Socket client;
 	static Point mouse;
-
-	// static Point mouse;
+	private static int ServerPort = 2025;
 
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, AWTException {
@@ -30,7 +29,6 @@ public class RCServer {
 			public void run() {
 				int[] coordinate = new int[] {};
 				// TODO Auto-generated method stub
-				int ServerPort = 2025;
 				System.out.println("Server: Waiting for connection......");
 				try {
 					serverSocket = new ServerSocket(ServerPort);
